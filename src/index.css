@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.comment-container{
+  width:318px;
+}
+.comment-container .form-control{
+  border-radius: 0;
+}
+.form{
+  padding: 1.5rem;
+  background:#efefef;
+}
+
+::placeholder{
+ color: #ccc !important;
+}
+
+.btn-submit{
+  background:#4aabd9;
+  color:white;
+}
+.gravatar-popup{
+  top:0;
+  left:0;
+  width:300px;
+  height:200px;
+  background:rgba(0, 0, 0, 0.5)
+}
+
+.commenter-email{
+  font-size: 0.9rem;
+  opacity: 0.87;
+}
+.msg{
+  color:#858585;
+  font-weight: 100;
+}
