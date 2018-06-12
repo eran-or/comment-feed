@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "concurrently": "^3.5.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-gravatar": "^2.6.3",
@@ -20,6 +23,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "homepage": "https://eran-or.github.io/comment-feed/",
+  "devDependencies": {
+    "gh-pages": "^1.2.0",
+    "nodemon": "^1.17.5" 
   }
 }
