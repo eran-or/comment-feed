@@ -1,4 +1,4 @@
-[{
+{"comments":[{
     "_id": "5b28cec16a3e7c2cb7113178",
     "createdAt": "2018-06-19T09:37:05.540Z",
     "email": "eran@gmail.com",
@@ -26,4 +26,4 @@
   "lastActive": "2018-06-19T09:37:05.540Z",
   "msg": "Hi!"
 }
-]
+]}
