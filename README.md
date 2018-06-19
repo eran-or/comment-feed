@@ -1,7 +1,7 @@
 # comment-feed
 
-This Repo is a comment feed including Form component to add new comment and comment list that already added.
-<br> also user can view the last active time of author when he click a comment on the list.
+This Repo is a comment feed including form to add new comment and list of comments.
+<br> Also user can view the last active time of specific author by clicking comment on the list.
 
 # Usage
 
