@@ -5,6 +5,6 @@ This Repo is a comment feed including Form component to add new comment and comm
 
 # Usage
 
-To strart the server: `npm start`
-To start the client: `nmp run client`
-In dev inviroment you can start both at once: `npm run dev`
+To strart the server: `npm start` <br>
+To start the client: `nmp run client` <br>
+In dev environment you can start both at once: `npm run dev`
