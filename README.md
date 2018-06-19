@@ -13,6 +13,6 @@ In dev environment you can start both at once: `npm run dev`
 
 # Demo
 
-Note! &nbsp;&nbsp;&nbsp;&nbsp; Because Github pages is designed for static web page, the form has not have the ability to save a comment so you can run the code in your local machine.
+Note! &nbsp;&nbsp;&nbsp;&nbsp; Because Github pages is designed for static web page, the form (only on demo) has not have the ability to save a comment so you can run the code in your local machine.
 
 [Demo](https://eran-or.github.io/comment-feed/)
