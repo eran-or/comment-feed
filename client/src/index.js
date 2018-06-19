@@ -37,7 +37,6 @@ const fetchComments = () => {
               // Just making sure res.json() does not raise an error
               return res.json().then((json) => {
                 const comments = json.comments.reverse()
-                console.log(comments)
                 store.dispatch(setComments(comments))
                 ReactDOM.render(app, document.getElementById('root'))
                 registerServiceWorker()
