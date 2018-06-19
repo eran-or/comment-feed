@@ -18,10 +18,14 @@ const app = (
   </Provider>
 )
 const fetchComments = () => {
-  console.log(window.location.hostname)
+  let uri = '/comments'
+  //for Github pages demo (with out server)
+  if(window.location.hostname === 'eran-or.github.io'){
+    uri = 'comments.json'
+  }
   return {
     [RSAA]: {
-      endpoint: '/comments',
+      endpoint:uri,
       method: 'GET',
       types: [
         'REQUEST',

@@ -1,0 +1,29 @@
+[{
+    "_id": "5b28cec16a3e7c2cb7113178",
+    "createdAt": "2018-06-19T09:37:05.540Z",
+    "email": "eran@gmail.com",
+    "lastActive": "2018-06-19T09:37:05.540Z",
+    "msg": "eran"
+},
+{
+  "_id": "5b27bc3fd6106f2aa6c06bf1",
+  "createdAt": "2018-06-18T14:05:51.150Z",
+  "email": "test@gmail.com",
+  "lastActive": "2018-06-18T14:05:51.150Z",
+  "msg": "test"
+},
+{
+  "_id": "5b27bc33d6106f2aa6c06bf0",
+  "createdAt": "2018-06-18T14:05:39.791Z",
+  "email": "eran@gmail.com",
+  "lastActive": "2018-06-19T09:37:05.540Z",
+  "msg": "Hi 2!"
+},
+{
+  "_id": "5b27ba380ab32a2a7b7c433f",
+  "createdAt": "2018-06-18T13:57:12.343Z",
+  "email": "eran@gmail.com",
+  "lastActive": "2018-06-19T09:37:05.540Z",
+  "msg": "Hi!"
+}
+]
