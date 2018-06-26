@@ -24,10 +24,7 @@
     "concurrently": "^3.5.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "moment": "^2.22.2",
-    "mongoose": "^5.1.5",
-    "react-icons-kit": "^1.1.5",
-    "react-transition-group": "^2.3.1"
+    "mongoose": "^5.1.5"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",

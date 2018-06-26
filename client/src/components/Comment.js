@@ -1,46 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Gravatar from 'react-gravatar'
-import { setActiveCommentRef } from '../redux/actions/comments'
 import moment from 'moment'
+import { Transition } from 'react-transition-group'
+import { setActiveComment } from '../redux/actions/comments'
 
 class Comment extends Component {
-  constructor(props) {
-    super(props)
-    this.commentRef = React.createRef()
+
+  defaultStyle = {
+    transition: "opacity 200ms ease-in-out",
+  }
+  transitionStyles = {
+    entering: { opacity: 0 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 }
   }
 
-  toggleDetails = (id, email) => {
-    
-    const { lastActiveCommentRef, setActiveCommentRef } = this.props
-    const current = this.commentRef.current
-    if(lastActiveCommentRef){
-      if (lastActiveCommentRef.id !== id) {
-        lastActiveCommentRef.ref.classList.add("d-none")
-        current.classList.remove("d-none")
-        
-        setActiveCommentRef({ id, ref: current })
-      } else {
-        current.classList.toggle("d-none")
-      }
-    }else{
-      
-      current.classList.toggle("d-none")
-      setActiveCommentRef({ id, ref: current })
+  state = {
+    stage: "entering",
+    active: false,
+    styles: {
+      ...this.defaultStyle
     }
   }
-  render() {
-    
-    const { comment } = this.props
-    const { email, msg, _id, lastActive } = comment
 
+  render() {
+    const { comment, setActiveComment, active } = this.props
+    const { email, msg, _id, lastActive } = comment
     return (
       <div className="mb-2 d-flex position-relative">
-        <div id={_id} ref={this.commentRef} className="position-absolute gravatar-popup d-none">
-          <div>{email}</div>
-          <div>last Active: {moment(lastActive).fromNow()}</div>
-        </div>
-        <div className={`mr-3`} onClick={() => this.toggleDetails(_id, email)}>
+
+        <Transition style={this.state.styles} key={_id} in={active} timeout={200} id={_id} className={`position-absolute gravatar-popup ${this.state.active ? '' : 'd-none'}`}
+          onEnter={() => {
+            this.setState({ active: true })
+          }}
+          onEntering={() => {
+            this.setState({ styles: { ...this.state.styles, ...this.transitionStyles["entering"] } })
+
+          }}
+          onEntered={() => {
+            this.setState({ styles: { ...this.state.styles, ...this.transitionStyles["entered"] } })
+
+          }}
+          onExiting={() => {
+            this.setState({ styles: { ...this.state.styles, ...this.transitionStyles["exiting"] } })
+          }}
+          onExited={() => {
+            this.setState({ active: false })
+          }}
+        >
+          <div>
+            <div>{email}</div>
+            <div>last Active: {moment(lastActive).fromNow()}</div>
+          </div>
+        </Transition>
+        <div className={`mr-3`} onClick={() => setActiveComment(_id)}>
           <Gravatar email={email} className="rounded" />
         </div>
         <div>
@@ -51,12 +65,10 @@ class Comment extends Component {
     )
   }
 }
-const mapStateToProps = (state) => ({
-  lastActiveCommentRef: state.lastActiveCommentRef
-})
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    setActiveCommentRef: (ref) => dispatch(setActiveCommentRef(ref))
+    setActiveComment: (id) => dispatch(setActiveComment(id))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Comment)
+export default connect(null, mapDispatchToProps)(Comment)

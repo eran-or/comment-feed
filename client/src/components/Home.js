@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import CommentForm from './CommentForm'
+import {TransitionGroup} from 'react-transition-group';
 import Comments from './Comments'
 import {setComments} from '../redux/actions/comments'
 import {sortLastActive} from '../utils'
+import FormContainer from './FormContainer'
 
 class Home extends Component {
   state = {
@@ -22,40 +23,27 @@ class Home extends Component {
       }
   }
 
-  handleSubmit = (email, msg) =>{
-    
-   fetch('/comments',{
-    method: 'POST',
-    body: JSON.stringify({email,msg}),
-    headers: {
-      'content-type': 'application/json'
-    }
-   }).then(res=>res.json()).then(json=>{
-    const {comments, setComments} = this.props
-    let errorMessage, reset;
-    if(json.error){
-      errorMessage = json.error.errors.email.message
-      reset = false
-    }else{
-      const {_id, createdAt} = json.createdComment
-      reset = true
-      errorMessage = undefined
-      const lastActive = new Date()
-      const newComments = [{_id, email, msg, createdAt}, ...comments].map((c)=>c.lastActive = lastActive)
-      setComments(newComments)
-    }
-    this.setState({errorMessage, reset})
-    }).catch(err=>console.log("error:", err))
-  }
+  
 
   render(){
-    const comments = this.state.comments || this.props.comments
+    const {setComments, lastActiveComment} = this.props
+    let comments = this.state.comments || this.props.comments
+    comments.map(c=>{
+      if(c._id === lastActiveComment){
+        c.isActive = true
+      }else{
+        c.isActive = false
+      }
+      return c
+    })
     return(
       <div className="container comment-container">
-        <CommentForm handleSubmit={this.handleSubmit} errorMessage={this.state.errorMessage} reset={this.state.reset} />
+        <FormContainer comments={comments} setComments={setComments} />
         <div className="commenters-container py-3 px-2">
           <input type="text" onKeyUp={this.filterByEmail} placeholder="Filter" className="form-control mb-4" />
+          <TransitionGroup className="comment-list">
           <Comments comments={comments}/>
+          </TransitionGroup>
         </div>
       </div>
     )
@@ -63,7 +51,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state)=>({
-  comments: sortLastActive(state.comments)
+  comments: sortLastActive(state.comments),
+  lastActiveComment: state.lastActiveComment
 })
 const mapDispatchToProps = (dispatch)=>({
   setComments: comments => dispatch(setComments(comments))
