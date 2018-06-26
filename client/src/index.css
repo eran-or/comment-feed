@@ -40,12 +40,16 @@ body {
   font-size: 14px;
   padding: 4px 7px;
 }
-
-.commenter-email{
+.commenter, .commenter *{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.commenter .email{
   font-size: 0.9rem;
   opacity: 0.87;
 }
-.msg{
+.commenter .msg{
   color:#858585;
   font-weight: 100;
 }

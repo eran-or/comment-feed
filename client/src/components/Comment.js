@@ -57,8 +57,8 @@ class Comment extends Component {
         <div className={`mr-3`} onClick={() => setActiveComment(_id)}>
           <Gravatar email={email} className="rounded" />
         </div>
-        <div>
-          <strong className="commenter-email">{email}</strong>
+        <div className="commenter">
+          <strong className="email">{email}</strong>
           <div className="msg">{msg}</div>
         </div>
       </div>

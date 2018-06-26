@@ -39,7 +39,7 @@ class Home extends Component {
     return(
       <div className="container comment-container">
         <FormContainer comments={comments} setComments={setComments} />
-        <div className="commenters-container py-3 px-2">
+        <div className="py-3 px-2">
           <input type="text" onKeyUp={this.filterByEmail} placeholder="Filter" className="form-control mb-4" />
           <TransitionGroup className="comment-list">
           <Comments comments={comments}/>
