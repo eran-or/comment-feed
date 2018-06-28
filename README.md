@@ -1,7 +1,7 @@
 # comment-feed
 
 This Repo is a comment feed including form to add new comment and list of comments.
-<br> Also user can view the last active time of specific author by clicking comment on the list.
+<br> Also user can view the last active time of specific author by clicking comment on the list, filtered comments are udated when the user add new comment.
 
 It built with ReactJs, NodeJs on the server, Mongoose as schema layer and Mongo Atlas as a store layer 
 
