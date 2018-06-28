@@ -8,39 +8,40 @@ import FormContainer from './FormContainer'
 
 class Home extends Component {
   state = {
-    comments:undefined
+    comments:undefined,
+    selected:undefined
+  }
+
+  constructor(props){
+    super(props)
+    this.filterInput = React.createRef()
+    document.body.addEventListener('update',  (e) => {
+       this.filterByEmail(this.filterInput.current)
+    }, false);
   }
   
   filterByEmail = (e)=>{
-      const {comments} = this.props
-      const str = e.target.value
+      let {comments} = this.props
+      const str = e.target?e.target.value:e.value
       const selected = comments.filter(c=> c.email.includes(str))
-      
-      if(str !== ''){
-        this.setState({comments:selected})
-      }else{
-        this.setState({comments:undefined})
-      }
+      comments = (str !== '')? selected : comments
+      this.setState({comments})
   }
-
-  
 
   render(){
     const {setComments, lastActiveComment} = this.props
-    let comments = this.state.comments || this.props.comments
+    const comments = this.state.comments || this.props.comments
+    
     comments.map(c=>{
-      if(c._id === lastActiveComment){
-        c.isActive = true
-      }else{
-        c.isActive = false
-      }
+      c.isActive = (c._id === lastActiveComment)? true : false 
       return c
     })
+    
     return(
       <div className="container comment-container">
-        <FormContainer comments={comments} setComments={setComments} />
+        <FormContainer comments={this.props.comments} setComments={setComments} />
         <div className="py-3 px-2">
-          <input type="text" onKeyUp={this.filterByEmail} placeholder="Filter" className="form-control mb-4" />
+          <input type="text" ref={this.filterInput} onKeyUp={this.filterByEmail} placeholder="Filter" className="form-control mb-4" />
           <TransitionGroup className="comment-list">
           <Comments comments={comments}/>
           </TransitionGroup>
@@ -50,10 +51,11 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state)=>({
+const mapStateToProps = (state)=> ({
   comments: sortLastActive(state.comments),
   lastActiveComment: state.lastActiveComment
 })
+
 const mapDispatchToProps = (dispatch)=>({
   setComments: comments => dispatch(setComments(comments))
 })

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CommentForm from './CommentForm'
 
+const update = new Event('update');
 export default class FormContainer extends Component {
   state = {
     errorMessage:undefined,
@@ -30,13 +31,13 @@ export default class FormContainer extends Component {
          return c
        })
        setComments(newComments)
+       document.body.dispatchEvent(update);
      }
      this.setState({errorMessage, msg:errorMessage?msg:'', email:errorMessage?email:''})
      }).catch(err=>console.log("error:", err))
    }
    
   handleChange = (e) => {
-    console.log(e)
     const target = e.target.name
     const value = e.target.value
     this.setState({[target]:value})
