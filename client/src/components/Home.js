@@ -16,6 +16,7 @@ class Home extends Component {
     super(props)
     this.filterInput = React.createRef()
     document.body.addEventListener('update',  (e) => {
+      //update the filtered comments when user add new comment
        this.filterByEmail(this.filterInput.current)
     }, false);
   }
@@ -36,7 +37,7 @@ class Home extends Component {
       c.isActive = (c._id === lastActiveComment)? true : false 
       return c
     })
-    
+
     return(
       <div className="container comment-container">
         <FormContainer comments={this.props.comments} setComments={setComments} />
