@@ -18,7 +18,7 @@ export default class FormContainer extends Component {
        'content-type': 'application/json'
      }
     }).then(res=>res.json()).then(json=>{
-     const {comments, setComments} = this.props
+     const {comments, handleUpdate} = this.props
      let errorMessage;
      if(json.error){
        errorMessage = json.error.errors.email.message
@@ -30,8 +30,7 @@ export default class FormContainer extends Component {
          c.lastActive = lastActive
          return c
        })
-       setComments(newComments)
-       document.body.dispatchEvent(update);
+       handleUpdate(newComments)
      }
      this.setState({errorMessage, msg:errorMessage?msg:'', email:errorMessage?email:''})
      }).catch(err=>console.log("error:", err))

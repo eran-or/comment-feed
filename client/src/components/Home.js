@@ -15,10 +15,6 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.filterInput = React.createRef()
-    document.body.addEventListener('update',  (e) => {
-      //update the filtered comments when user add new comment
-       this.filterByEmail(this.filterInput.current)
-    }, false);
   }
   
   filterByEmail = (e)=>{
@@ -29,8 +25,15 @@ class Home extends Component {
       this.setState({comments})
   }
 
+  handleUpdate = (comments) => {
+    const {setComments} = this.props
+    //update the filtered comments when user add new comment
+    setComments(comments)
+    this.filterByEmail(this.filterInput.current)
+  }
+
   render(){
-    const {setComments, lastActiveComment} = this.props
+    const {lastActiveComment} = this.props
     const comments = this.state.comments || this.props.comments
     
     comments.map(c=>{
@@ -40,7 +43,7 @@ class Home extends Component {
 
     return(
       <div className="container comment-container">
-        <FormContainer comments={this.props.comments} setComments={setComments} />
+        <FormContainer comments={this.props.comments} handleUpdate={this.handleUpdate}/>
         <div className="py-3 px-2">
           <input type="text" ref={this.filterInput} onKeyUp={this.filterByEmail} placeholder="Filter" className="form-control mb-4" />
           <TransitionGroup className="comment-list">
