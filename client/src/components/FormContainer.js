@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import CommentForm from './CommentForm'
 
-const update = new Event('update');
 export default class FormContainer extends Component {
   state = {
     errorMessage:undefined,
