@@ -7,7 +7,7 @@ const commentRoutes = require("./routes/comments");
 
 const app = express();
 
-const API_PORT = process.env.API_PORT || 3001;
+const PORT = process.env.PORT || process.env.API_PORT || 3333;
 const db = mongoose.connection;
 //mongoose.connect( `mongodb+srv://eran:${process.env.MONGO_ATLAS_PW}@comment-feed-mziep.mongodb.net/test?retryWrites=true` );
 mongoose.connect( "mongodb+srv://eran:"+process.env.MONGO_ATLAS_PW+"@comment-feed-mziep.mongodb.net/test?retryWrites=true");
@@ -47,4 +47,4 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
